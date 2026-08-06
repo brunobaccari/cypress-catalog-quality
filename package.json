@@ -1,0 +1,17 @@
+{
+  "name": "cypress-catalog-quality",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "test": "node --env-file-if-exists=.env node_modules/cypress/bin/cypress run --browser chrome",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "24.0.0",
+    "cypress": "16.1.1",
+    "typescript": "5.9.3"
+  },
+  "engines": {
+    "node": ">=22.9"
+  }
+}
