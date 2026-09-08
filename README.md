@@ -1,12 +1,15 @@
 # ServeRest — Cypress e TypeScript
 
+[English version](README.en.md)
+
 Testes contra **https://front.serverest.dev** e **https://serverest.dev**. Continuação do meu [Cypress/ServeRest](https://github.com/brunobaccari/cypress-serverest), mantendo `frontend` e `api` separados.
 
 ## Instalação e execução
 
-Node.js 22 ou superior, npm e Google Chrome. O CI usa Node 24.
+Node.js 22.9 ou superior, npm e Google Chrome. O CI usa Node 24.
 
 ```bash
+cp .env.example .env
 npm ci
 npm run typecheck
 npm test
