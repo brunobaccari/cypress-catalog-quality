@@ -33,4 +33,7 @@ This is a shared public environment. Resets and changes by others can affect a r
 
 References: [ServeRest API documentation](https://serverest.dev/) and [official repository](https://github.com/ServeRest/ServeRest).
 
+
+On GitHub, open **Actions → Tests → run → Summary** for the test-step outcome, JUnit counts and evidence download link. Under **Artifacts**, download `test-results` and extract the ZIP to open the reports. The ZIP also includes `summary.md`. Retention is 7 days; upload and summary steps also run after failures. Missing reports are explicitly reported as unverified execution.
+
 Commit dates in this portfolio were reorganized retroactively; Actions runs retain their actual execution dates.

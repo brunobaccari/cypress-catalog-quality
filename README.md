@@ -44,4 +44,7 @@ Copie `.env.example` para `.env` (`Copy-Item .env.example .env` no PowerShell ou
 
 As contas do exemplo são públicas e exclusivas de demonstração. Para outro ambiente, injete credenciais via secrets do CI e confirme também o contrato e os dados esperados antes de executar.
 
+
+Para consultar no GitHub, abra **Actions → Tests → execução → Summary**. O resumo mostra o resultado da etapa, as contagens do JUnit e o link para baixar as evidências. Em **Artifacts**, baixe `test-results` e extraia o ZIP para abrir os relatórios. O ZIP inclui também `summary.md`. A retenção é de 7 dias; o upload e o resumo também são executados após falhas. Se não houver relatório, o resumo informa que não foi possível confirmar a execução.
+
 Datas de commits deste portfólio foram reorganizadas retroativamente; as execuções do Actions mantêm suas datas reais.
