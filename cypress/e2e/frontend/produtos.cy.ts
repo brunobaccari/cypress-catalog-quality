@@ -1,9 +1,9 @@
-import { api, Admin, criarAdministrador, novoProduto, limparDados } from '../../support/dados';
+import { api, Usuario, criarUsuario, novoProduto, limparDados } from '../../support/dados';
 
 describe('Produtos — frontend hospedado do ServeRest', () => {
-  let admin: Admin;
+  let admin: Usuario;
   const ids: string[] = [];
-  before(() => criarAdministrador().then(value => { admin = value; }));
+  before(() => criarUsuario().then(value => { admin = value; }));
   after(() => { if (admin) limparDados(admin, ids); });
   beforeEach(() => {
     cy.visit('/login');

@@ -1,10 +1,15 @@
-import { api, Admin, criarAdministrador, novoProduto, limparDados } from '../../support/dados';
+import { api, Usuario, criarUsuario, novoProduto, limparDados } from '../../support/dados';
 
 describe('Produtos — API hospedada do ServeRest', () => {
-  let admin: Admin;
+  let admin: Usuario;
+  let usuario: Usuario;
   const ids: string[] = [];
-  before(() => criarAdministrador().then(value => { admin = value; }));
-  after(() => { if (admin) limparDados(admin, ids); });
+  before(() => criarUsuario().then(value => { admin = value; }));
+  before(() => criarUsuario(false).then(value => { usuario = value; }));
+  after(() => {
+    if (admin) limparDados(admin, ids);
+    if (usuario) limparDados(usuario, []);
+  });
 
   it('cria, consulta e exclui apenas o produto do cenário', () => {
     const produto = novoProduto();
@@ -41,4 +46,23 @@ describe('Produtos — API hospedada do ServeRest', () => {
   it('não permite criar produto sem autenticação', () => {
     cy.request({ method: 'POST', url: `${api}/produtos`, body: novoProduto(), failOnStatusCode: false }).its('status').should('eq', 401);
   });
+
+  for (const method of ['PUT', 'DELETE']) {
+    it(`bloqueia ${method} de usuário comum sem alterar o produto`, () => {
+      const produto = novoProduto();
+      cy.request({ method: 'POST', url: `${api}/produtos`, headers: { Authorization: admin.token }, body: produto }).then(({ body }) => {
+        ids.push(body._id);
+        cy.request({
+          method, url: `${api}/produtos/${body._id}`,
+          headers: { Authorization: usuario.token },
+          ...(method === 'PUT' ? { body: { ...produto, preco: 1 } } : {}),
+          failOnStatusCode: false,
+        }).then(response => {
+          expect(response.status).to.eq(403);
+          expect(response.body.message).to.eq('Rota exclusiva para administradores');
+        });
+        cy.request(`${api}/produtos/${body._id}`).its('body').should('deep.eq', { ...produto, _id: body._id });
+      });
+    });
+  }
 });
