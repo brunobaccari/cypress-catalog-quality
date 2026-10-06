@@ -19,7 +19,7 @@ On PowerShell, use `Copy-Item .env.example .env`. No local application is requir
 
 ## Scenarios and data
 
-Eight cases cover product creation, lookup and deletion; duplicate names without modifying the original; negative, fractional and nonnumeric prices; unauthorized creation; creation through the UI checked against the API; and UI deletion of an API-created product.
+Ten cases cover product creation, lookup and deletion; duplicate names without modifying the original; negative, fractional and nonnumeric prices; unauthorized creation; creation through the UI checked against the API; and UI deletion of an API-created product.
 
 Each spec creates its own temporary administrator. Products include a UUID in their names, and cleanup uses only IDs created by the suite. `cypress/support/dados.ts` owns setup and cleanup. Other users' records are not removed.
 
@@ -35,5 +35,11 @@ References: [ServeRest API documentation](https://serverest.dev/) and [official 
 
 
 On GitHub, open **Actions → Tests → run → Summary** for the test-step outcome, JUnit counts and evidence download link. Under **Artifacts**, download `test-results` and extract the ZIP to open the reports. The ZIP also includes `summary.md`. Retention is 7 days; upload and summary steps also run after failures. Missing reports are explicitly reported as unverified execution.
+
+## Risks and CI decision
+
+Authentication does not establish authorization: a regular user attempts to update and delete an administrator-created product. The suite requires 403 and reads every field again to verify that the attempt did not change state. Test-owned IDs are removed during teardown.
+
+The gate requires successful tests and readable JUnit, with no failures, skipped cases or empty report. A run without a report does not approve the commit. For a failure, check installation/network first, then the state captured in artifacts and the scenario expectation; changing an expectation requires confirming the target rule. No automatic test retry converts a failure into approval.
 
 Commit dates in this portfolio were reorganized retroactively; Actions runs retain their actual execution dates.
