@@ -12,7 +12,7 @@ export default defineConfig({
   reporterOptions: { mochaFile: "results/junit-[hash].xml", toConsole: true },
   e2e: {
     baseUrl: process.env.BASE_URL,
-    supportFile: false,
+    supportFile: "cypress/support/e2e.ts",
     testIsolation: true,
     defaultCommandTimeout: 15000,
     pageLoadTimeout: 60000,

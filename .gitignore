@@ -25,3 +25,5 @@ cypress/videos/
 cypress/screenshots/
 cypress/downloads/
 playwright-report/
+__pycache__/
+*.py[cod]

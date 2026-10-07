@@ -43,3 +43,7 @@ Authentication does not establish authorization: a regular user attempts to upda
 The gate requires successful tests and readable JUnit, with no failures, skipped cases or empty report. A run without a report does not approve the commit. For a failure, check installation/network first, then the state captured in artifacts and the scenario expectation; changing an expectation requires confirming the target rule. No automatic test retry converts a failure into approval.
 
 Commit dates in this portfolio were reorganized retroactively; Actions runs retain their actual execution dates.
+
+The Actions summary lists every scenario, duration, totals and blocking reason. The gate requires the count configured in the workflow, with no failures or skips; missing or invalid JUnit fails the gate. The summary is also included in the artifact.
+
+Final-state screenshots are also captured for passing UI tests and stored in artifacts, outside Git.
