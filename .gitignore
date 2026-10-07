@@ -27,3 +27,4 @@ cypress/downloads/
 playwright-report/
 __pycache__/
 *.py[cod]
+.husky/_/

@@ -4,12 +4,15 @@
   "private": true,
   "scripts": {
     "test": "node --env-file-if-exists=.env node_modules/cypress/bin/cypress run --browser chrome",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "prepare": "husky",
+    "check:local": "git diff --cached --check && python scripts/summary.py --self-test && npm run typecheck"
   },
   "devDependencies": {
     "@types/node": "24.0.0",
     "cypress": "16.1.1",
-    "typescript": "5.9.3"
+    "typescript": "5.9.3",
+    "husky": "9.1.7"
   },
   "engines": {
     "node": ">=22.9"
